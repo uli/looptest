@@ -1,0 +1,18 @@
+A test scipt to automatically verify Linux DRM driver video output using a
+loopback cable and a suitable V4L input device.
+
+Example:
+
+python run_tests.py -M rcar-du -c 49 -v /dev/video31 -r 800x600-60,1024x768-60
+
+This will test resolutions 800x600-60 and 1024x768-60 on rcar-du, connector
+49, using /dev/video31 as the loopback input device.
+
+It relies on the presence of the following tools:
+
+- modetest from libdrm to create the test pattern
+- yavta (http://git.ideasonboard.org/yavta.git), with a little patch
+  (yavta.patch) that updates the DV timings before capturing a frame
+- raw2rgbpnm (git://git.retiisi.org.uk/~sailus/raw2rgbpnm.git)
+- ImageMagick's convert and compare tools
+- Python 2

@@ -1,0 +1,23 @@
+diff --git a/yavta.c b/yavta.c
+index 49361ad..701d97a 100644
+--- a/yavta.c
++++ b/yavta.c
+@@ -350,6 +350,8 @@ static int video_set_fd(struct device *dev, int fd)
+ 
+ static int video_open(struct device *dev, const char *devname)
+ {
++	struct v4l2_dv_timings timings; 
++
+ 	if (video_has_fd(dev)) {
+ 		printf("Can't open device (already open).\n");
+ 		return -1;
+@@ -366,6 +368,9 @@ static int video_open(struct device *dev, const char *devname)
+ 
+ 	dev->opened = 1;
+ 
++	if (!ioctl(dev->fd, VIDIOC_QUERY_DV_TIMINGS, &timings))
++		ioctl(dev->fd, VIDIOC_S_DV_TIMINGS, &timings);
++
+ 	return 0;
+ }
+ 
