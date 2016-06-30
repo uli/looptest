@@ -16,7 +16,6 @@ indev = None
 resolutions = None
 
 for o, a in opts:
-  print 'oa',o,a
   if o == '-M':
     module = a
   elif o == '-c':
